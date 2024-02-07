@@ -1,7 +1,8 @@
-use serde_derive::{Deserialize, Serialize};
+use postgres_types::FromSql;
+use serde::{Deserialize, Serialize};
 use validator::Validate;
 
-#[derive(Debug, Validate, Deserialize, sqlx::FromRow, Serialize)]
+#[derive(Debug, Validate, Deserialize, Serialize)]
 pub struct Transaction {
     #[validate(required, range(min = 1))]
     pub valor: Option<f32>,
@@ -24,10 +25,10 @@ pub struct AccountBalance {
     pub limite: i32,
 }
 
-#[derive(Serialize, sqlx::FromRow)]
+#[derive(Serialize, FromSql, Deserialize)]
 pub struct TransactionDetail {
-    valor: i32,
-    tipo: String,
-    descricao: String,
-    realizada_em: String,
+    pub valor: i32,
+    pub tipo: String,
+    pub descricao: String,
+    pub realizada_em: String,
 }

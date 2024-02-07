@@ -1,4 +1,4 @@
-FROM rust:1.71.1 as builder
+FROM rust:slim-bullseye as builder
 WORKDIR /app
 RUN USER=root cargo new backend-dogfight-rust-24-q1
 WORKDIR /app/backend-dogfight-rust-24-q1
